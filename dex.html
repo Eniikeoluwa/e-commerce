@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body onload="eniks()">
+    <div class="first">
+      <h1 class="eniks">Eniks</h1>
+      <button onclick="cart">Add to cart</button>
+    </div>
+    <div class="search">
+      <input type="text" name="search" id="search" placeholder="Search item">
+      <button onclick="search()" id="search-button">Search</button>
+      <ul id="items-found"></ul>
+    </div>
+    <div class="carousel">
+      <img src="men2.webp" name="slide" width="500" height="500" id="main-image">
+    </div>
+    <main>
+      <div class="category">
+        <button onclick="all()">All</button>
+        <button onclick="men()">Men</button>
+        <button onclick="women()">Women</button>
+        <button onclick="jewellry()">Jewelery</button>
+        <button onclick="gadgets()" type="button">Gadgets</button>
+      </div>
+      <p id="show"></p>
+      <p id="all-show" class="paragraph"></p>
+      <p id="women-show" class="paragraph"></p>
+      <p id="men-show" class="paragraph"></p>
+      <p id="jewellry-show" class="paragraph"></p>
+      <p id="gadgets-show" class="paragraph"></p>
+    </main>
+    <script>
+      let myImage = document.getElementById("main-image")
+      let i = 0;
+      let images= [];
+      images[0] = "men2.webp";
+      images[1] = "tele.jpg";
+      images[2] = "cloth.jpg";
+      images[3] = "hoodie.jpg";
+      images[4] = "ring.jpg";
+  
+      function eniks() {
+          setInterval(() => {
+              myImage.setAttribute("src", images[i]);
+              i++
+              if (i === 5) {
+                  i = 0;
+              }
+          }, 2000);
+      }
+  </script>
+
+    <script>
+      let screen = document.getElementById("show");
+      fetch("https://fakestoreapi.com/products/")
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            // console.log(element);
+            screen.innerHTML += `  <div class="data-columns">
+       <img src="${element.image}" class="image" alt="">
+       <div class="content">
+       <p class="header">${element.title}</p>
+       <p class="price">$${element.price}</p>
+       <p class="desc">${element.description}</p>
+       <div>
+    </div>`;
+          }
+        });
+</script>
+
+    <script>
+      let menShow = document.getElementById("men-show");
+
+      function men() {
+        fetch("https://fakestoreapi.com/products/")
+        .then((res) => res.json())
+        .then((json) => {
+          menShow.innerHTML += "";
+          for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            // console.log(element);
+            const category = element.category.toLowerCase();
+            // console.log(category);
+
+            if(category == "men's clothing") {
+
+              menShow.innerHTML += `
+              <div class="content">
+              <img src="${element.image}" class="image" alt="">
+              <p class="header">${element.title}</p>
+              <p class="price">$${element.price}</p>
+              <p class="desc">${element.description}</p>
+              <div>
+            </div>`;
+            screen.style.display = "none";
+            // womenShow.style.display = "none";
+            // jewellryShow.style.display = "none";
+            // gadgetShow.style.display = "none";
+            }
+          }
+        });
+      }
+    </script>
+
+<script>
+  let womenShow = document.getElementById("women-show");
+
+  function women() {
+    fetch("https://fakestoreapi.com/products/")
+        .then((res) => res.json())
+        .then((json) => {
+          womenShow.innerHTML += "";
+          for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            // console.log(element);
+            const category = element.category.toLowerCase();
+            // console.log(category);
+
+            if(category == "women's clothing") {
+
+              womenShow.innerHTML += `
+              <div class="content">
+              <img src="${element.image}" class="image" alt="">
+              <p class="header">${element.title}</p>
+              <p class="price">$${element.price}</p>
+              <p class="desc">${element.description}</p>
+              <div>
+            </div>`;
+            screen.style.display = "none";
+            // jewellryShow.style.display = "none";
+            // gadgetShow.style.display = "none";
+            // menShow.style.display = "none";
+            }
+          }
+        });
+      }
+</script>
+<script>
+  let jewellryShow = document.getElementById("jewellry-show");
+
+    function jewellry() {
+    fetch("https://fakestoreapi.com/products/")
+        .then((res) => res.json())
+        .then((json) => {
+          jewellryShow.innerHTML += "";
+          for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            // console.log(element);
+            const category = element.category.toLowerCase();
+            // console.log(category);
+
+            if(category == "jewelery") {
+
+              jewellryShow.innerHTML += `
+              <div class="content">
+              <img src="${element.image}" class="image" alt="">
+              <p class="header">${element.title}</p>
+              <p class="price">$${element.price}</p>
+              <p class="desc">${element.description}</p>
+              <div>
+            </div>`;
+            screen.style.display = "none";
+            // jewellryShow.style.display = "none";
+            // gadgetShow.style.display = "none";
+            // menShow.style.display = "none";
+            }
+          }
+        });
+      }
+</script>
+<script>
+// let jewellryShow = document.getElementById("jewellry-show");
+
+// function jewellry() {
+//   fetch("https://fakestoreapi.com/products/")
+//         .then((res) => res.json())
+//         .then((json) => {
+//           jewellryShow.innerHTML += "";
+//           for (let index = 0; index < json.length; index++) {
+//             const element = json[index];
+//             // console.log(element);
+//             const category = element.category.toLowerCase();
+//             // console.log(category);
+
+//             if(category == "jewelery") {
+
+//               jewellryShow.innerHTML += `
+//               <div class="content">
+//               <img src="${element.image}" class="image" alt="">
+//               <p class="header">${element.title}</p>
+//               <p class="price">$${element.price}</p>
+//               <p class="desc">${element.description}</p>
+//               <div>
+//             </div>`;
+//             screen.style.display = "none";
+//             // womenShow.style.display = "none";
+//             // gadgetShow.style.display = "none";
+//             // menShow.style.display = "none";
+//             }
+//           }
+//         });
+// }
+</script>
+<script>
+let gadgetShow = document.getElementById("gadgets-show");
+
+function gadgets() {
+  fetch("https://fakestoreapi.com/products/")
+        .then((res) => res.json())
+        .then((json) => {
+          gadgetShow.innerHTML += "";
+          for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            // console.log(element);
+            const category = element.category.toLowerCase();
+            // console.log(category);
+
+            if(category == "electronics") {
+
+              gadgetShow.innerHTML += `
+              <div class="content">
+              <img src="${element.image}" class="image" alt="">
+              <p class="header">${element.title}</p>
+              <p class="price">$${element.price}</p>
+              <p class="desc">${element.description}</p>
+              <div>
+            </div>`;
+            screen.style.display = "none";
+            // womenShow.style.display = "none";
+            // jewellryShow.style.display = "none";
+            // menShow.style.display = "none";
+            }
+          }
+        });
+}
+</script>
+
+<script>
+  // function search() {
+  //   let itemsFound = document.getElementById("items-found");
+  //   let searchInput = document.getElementById("search");
+  //   let searchString = searchInput.value;
+  //   let searchItems = search(searchString);
+
+  //   itemsFound.innerHTML += "";
+  //   searchItems.forEach(element => {
+  //     let li = document.createElement("li");
+  //     li.innerText = `${element.title}`
+  //     ul.appendChild(li);
+  //   });
+
+  // }
+</script>
+  </body>
+</html>

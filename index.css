@@ -1,0 +1,148 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+.first button {
+    padding: 0.8rem;
+    color: rgb(139, 156, 190);
+    border: none;
+     background: none;
+        font-size: large;
+        cursor: pointer;
+}
+.eniks {
+    display: center;
+    text-decoration: #7a79bd;
+}
+/* header {
+    text-align: end;
+    text-decoration: #7a79bd;
+    text-transform: capitalize;
+    text-shadow: #0e0e0e;
+} */
+.carousel {
+    display: grid;
+    gap: 1rem 2rem;
+    /* flex-direction: row; */
+    /* align-items: center;
+    justify-content: center; */
+    /* gap: 30px; */
+    justify-items: center;
+    margin-top: 1rem;
+}
+.search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.search button {
+    padding: 0.8rem;
+    color: rgb(139, 156, 190);
+    border: none;
+     background: none;
+        font-size: large;
+        cursor: pointer;
+}
+.search input {
+    width: 25%;
+    padding: 7px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+}
+button {
+    position: relative;
+}
+.category {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.category button {
+    padding: 0.8rem;
+    color: rgb(139, 156, 190);
+    border: none;
+     background: none;
+        font-size: large;
+        cursor: pointer;
+}
+button {
+    position: relative;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #7a79bd;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+button:hover::before {
+    transform: scaleX(1);
+}
+.data-columns {
+    display: grid;
+    gap: 1rem 2rem;
+    /* flex-direction: row; */
+    /* align-items: center;
+    justify-content: center; */
+    /* gap: 30px; */
+    justify-items: center;
+    margin-top: 1rem;
+}
+.content {
+    width: 35%;
+    margin-top: 10px;
+}
+.content p {
+    padding: 0.3rem;
+}
+.image {
+   position: relative;
+   min-width: 170px;
+   max-width: 210px;
+   /* border: 2px solid rgb(27, 52, 113); */
+}
+.flex {
+    display: flex;
+    gap: 20px;
+}
+.header {
+    font-size: 20px;
+     font-weight: 500;
+     color: #0e0e0e;
+}
+.price {
+    font-weight: bold;
+    color: #9593d4;
+    font-size: 25px;
+}
+.desc {
+    font-size: 15px;
+    text-align: justify;
+    font-weight: 400;
+    color: rgb(136, 129, 129);
+    font-family: -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif;
+}
