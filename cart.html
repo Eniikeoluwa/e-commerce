@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+</head>
+<style>
+    .content img {
+        height: 100px;
+    }   
+</style>
+<body>
+    <p id="show"></p>
+    <p id="totalAmount"></p>
+    <div id="show2"></div>
+</body>
+<script>
+let screen = document.getElementById("show");
+let screen2 = document.getElementById("show2")
+let totalAmount = document.getElementById("totalAmount");
+let gotten = JSON.parse(localStorage.getItem("item"));
+
+function show(){
+    screen.innerHTML = "";
+    gotten.forEach(element => {
+        screen.innerHTML += `<div class="content">
+                  <img src="${element.image}" class="image" alt="">
+                  <p class="header">${element.name}</p>
+                  <p class="price">$${element.price}</p>
+                  <button onclick="del(${element.id})" class="cart">DELETE</button>
+                  <div>
+                </div>`;
+
+                screen2.innerHTML = `<button type="button" onclick="makePayment(${element.price})">Pay Now</button>`
+    });
+}
+show()
+
+function del(id) {
+    gotten.splice(id, 1);
+    localStorage.setItem("item", JSON.stringify(gotten))
+    show();
+}
+//total
+let cartTotal = 0;
+gotten.forEach((element) => {
+    cartTotal += element.price;  
+    totalAmount.textContent = `TOTAL: $${cartTotal}`
+})
+console.log(cartTotal);
+
+
+
+
+
+function makePayment() {
+  FlutterwaveCheckout({
+    public_key: "FLWPUBK_TEST-5a234b6fdd3454aa07e88a40b8f6459b-X",
+    tx_ref: "titanic-48981487343MDI0NzMx",
+    amount: cartTotal,
+    currency: "USD",
+    payment_options: "card, mobilemoneyghana, ussd",
+    redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
+    meta: {
+      consumer_id: 23,
+      consumer_mac: "92a3-912ba-1192a",
+    },
+    customer: {
+      email: "olaniyieniikeoluwa@gmail.com",
+      phone_number: "08103173689",
+      name: "Eniikeoluwa Olaniyi",
+    },
+    customizations: {
+      title: "Eniks Store",
+      description: "Payment for an awesome cruise",
+      logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+    },
+  });
+}
+</script>
+</html>

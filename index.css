@@ -27,7 +27,12 @@ font-family: 'Arial', sans-serif;
   
 }
 .cart {
-  /* float: right; */
+  padding: 0.8rem;
+  color: rgb(139, 156, 190);
+  border: 2px solid black;
+  background: none;
+  font-size: large;
+  cursor: pointer;
   font-size: 20px;
 }
 /* header {

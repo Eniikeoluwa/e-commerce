@@ -7,12 +7,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body>
+  <body onload="eniks()">
     <div class="first">
       <h1 class="eniks"></h1>
-      <button class="cart">
-        Add to cart 
-      </button>
+      <a href="cart.html">Cart</a>
+      <p id="cart-show"></p>
     </div>
     <div class="search">
       <input type="text" name="search" id="search" placeholder="Search item" />
@@ -30,7 +29,6 @@
     </div>
     <main>
       <div class="category">
-        <button onclick="all()">All</button>
         <button onclick="men()">Men</button>
         <button onclick="women()">Women</button>
         <button onclick="jewellry()">Jewelery</button>
@@ -80,20 +78,20 @@
        <p class="header">${element.title}</p>
        <p class="price">$${element.price}</p>
        <p class="desc">${element.description}</p>
+       <button onclick="buy(${element.id})" class="cart">Add to cart</button>
        <div>
     </div>`;
           }
         });
     </script>
-
      <script>
       let menShow = document.getElementById("men-show");
 
       function men() {
+        menShow.innerHTML = "";
         fetch("https://fakestoreapi.com/products/")
           .then((res) => res.json())
           .then((json) => {
-            menShow.innerHTML += "";
             for (let index = 0; index < json.length; index++) {
               const element = json[index];
               // console.log(element);
@@ -106,13 +104,14 @@
               <img src="${element.image}" class="image" alt="">
               <p class="header">${element.title}</p>
               <p class="price">$${element.price}</p>
-              <p class="desc">${element.description}</p>
+              <button onclick="buy(${element.id})" class="cart">Add to cart</button>
               <div>
             </div>`;
                 screen.style.display = "none";
-                // womenShow.style.display = "none";
-                // jewellryShow.style.display = "none";
-                // gadgetShow.style.display = "none";
+                menShow.style.display = "flex"
+                womenShow.style.display = "none";
+                jewellryShow.style.display = "none";
+                gadgetShow.style.display = "none";
               }
             }
           });
@@ -123,10 +122,11 @@
       let womenShow = document.getElementById("women-show");
 
       function women() {
+        womenShow.innerHTML = "";
         fetch("https://fakestoreapi.com/products/")
           .then((res) => res.json())
           .then((json) => {
-            womenShow.innerHTML += "";
+            
             for (let index = 0; index < json.length; index++) {
               const element = json[index];
               // console.log(element);
@@ -139,13 +139,14 @@
               <img src="${element.image}" class="image" alt="">
               <p class="header">${element.title}</p>
               <p class="price">$${element.price}</p>
-              <p class="desc">${element.description}</p>
+              <button onclick="buy(${element.id})" class="cart">Add to cart</button>
               <div>
             </div>`;
                 screen.style.display = "none";
-                // jewellryShow.style.display = "none";
-                // gadgetShow.style.display = "none";
-                // menShow.style.display = "none";
+                womenShow.style.display = "flex"
+                jewellryShow.style.display = "none";
+                gadgetShow.style.display = "none";
+                menShow.style.display = "none";
               }
             }
           });
@@ -155,10 +156,11 @@
       let jewellryShow = document.getElementById("jewellry-show"); 
 
       function jewellry() {
+        jewellryShow.innerHTML = "";
         fetch("https://fakestoreapi.com/products/")
           .then((res) => res.json())
           .then((json) => {
-            jewellryShow.innerHTML += "";
+            
             for (let index = 0; index < json.length; index++) {
               const element = json[index];
               // console.log(element);
@@ -171,59 +173,28 @@
               <img src="${element.image}" class="image" alt="">
               <p class="header">${element.title}</p>
               <p class="price">$${element.price}</p>
-              <p class="desc">${element.description}</p>
+              <button onclick="buy(${element.id})" class="cart">Add to cart</button>
               <div>
             </div>`;
                 screen.style.display = "none";
-                // jewellryShow.style.display = "none";
-                // gadgetShow.style.display = "none";
-                // menShow.style.display = "none";
+                jewellryShow.style.display = "flex";
+                gadgetShow.style.display = "none";
+                womenShow.style.display = "none"
+                menShow.style.display = "none";
               }
             }
           });
       }
     </script>
     <script>
-      // let jewellryShow = document.getElementById("jewellry-show");
-
-      // function jewellry() {
-      //   fetch("https://fakestoreapi.com/products/")
-      //         .then((res) => res.json())
-      //         .then((json) => {
-      //           jewellryShow.innerHTML += "";
-      //           for (let index = 0; index < json.length; index++) {
-      //             const element = json[index];
-      //             // console.log(element);
-      //             const category = element.category.toLowerCase();
-      //             // console.log(category);
-
-      //             if(category == "jewelery") {
-
-      //               jewellryShow.innerHTML += `
-      //               <div class="content">
-      //               <img src="${element.image}" class="image" alt="">
-      //               <p class="header">${element.title}</p>
-      //               <p class="price">$${element.price}</p>
-      //               <p class="desc">${element.description}</p>
-      //               <div>
-      //             </div>`;
-      //             screen.style.display = "none";
-      //             // womenShow.style.display = "none";
-      //             // gadgetShow.style.display = "none";
-      //             // menShow.style.display = "none";
-      //             }
-      //           }
-      //         });
-      // }
-    </script>
-    <script>
       let gadgetShow = document.getElementById("gadgets-show");
 
       function gadgets() {
+        gadgetShow.innerHTML = "";
         fetch("https://fakestoreapi.com/products/")
           .then((res) => res.json())
           .then((json) => {
-            gadgetShow.innerHTML += "";
+           
             for (let index = 0; index < json.length; index++) {
               const element = json[index];
               // console.log(element);
@@ -236,34 +207,48 @@
               <img src="${element.image}" class="image" alt="">
               <p class="header">${element.title}</p>
               <p class="price">$${element.price}</p>
-              <p class="desc">${element.description}</p>
+              <button onclick="buy(${element.id})" class="cart">Add to cart</button>
               <div>
             </div>`;
                 screen.style.display = "none";
-                // womenShow.style.display = "none";
-                // jewellryShow.style.display = "none";
-                // menShow.style.display = "none";
+                womenShow.style.display = "none";
+                jewellryShow.style.display = "none";
+                menShow.style.display = "none";
+                gadgetShow.style.display = "flex"
               }
             }
           });
       }
     </script>
-
     <script>
-      // function search() {
-      //   let itemsFound = document.getElementById("items-found");
-      //   let searchInput = document.getElementById("search");
-      //   let searchString = searchInput.value;
-      //   let searchItems = search(searchString);
-
-      //   itemsFound.innerHTML += "";
-      //   searchItems.forEach(element => {
-      //     let li = document.createElement("li");
-      //     li.innerText = `${element.title}`
-      //     ul.appendChild(li);
-      //   });
-
-      // }
+      function buy(id) {
+        fetch("https://fakestoreapi.com/products/")
+        .then((res) => res.json())
+        .then((json) => {
+          // console.log(json);
+          for (let index = 0; index < json.length; index++) {
+            const product = json[index];
+            // console.log(product);
+            if (product.id == id){
+              let item = {
+                name: product.title,
+                image: product.image,
+                // quantity: product.quantity,
+                price: product.price,
+              };
+              // console.log(item);
+            let cartArr = JSON.parse(localStorage.getItem("item")) || [];
+            cartArr.push(item);
+            localStorage.setItem("item", JSON.stringify(cartArr));
+            // console.log(cartArr);
+      
+              alert(`${product.title} have been added to cart`);
+              break;
+            }
+          }
+        });
+      }
     </script>
+
   </body>
 </html>
